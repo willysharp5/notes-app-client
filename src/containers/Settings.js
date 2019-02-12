@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Settings.css";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 
 export default class Settings extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userEmail: ""
+      userEmail: "",
+      isLoading: false
     };
   }
 
@@ -25,6 +26,12 @@ export default class Settings extends Component {
     }
   
     this.setState({ isAuthenticating: false });
+  }
+
+  billUser(details) {
+    return API.post("notes", "/billing", {
+      body: details
+    });
   }
 
   render() {
