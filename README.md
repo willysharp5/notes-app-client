@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ##Deploy 
-REACT_APP_STAGE=dev npm run build
+REACT_APP_STAGE=dev npm run build <br>
 REACT_APP_STAGE=prod npm run build
 
 ## Available Scripts
