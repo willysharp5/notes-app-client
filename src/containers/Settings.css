@@ -1,0 +1,15 @@
+@media all and (min-width: 480px) {
+    .Settings {
+      padding: 60px 0;
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
+  .Settings .LoaderButton:last-child {
+    margin-top: 15px;
+  }
+
+  .Settings h3 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+  }
