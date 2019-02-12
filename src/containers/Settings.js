@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Settings.css";
+//Billing Stripe
 import { Auth, API } from "aws-amplify";
+import config from "../config";
+import BillingForm from "../components/BillingForm";
+import { Elements, StripeProvider } from "react-stripe-elements";
 
 export default class Settings extends Component {
   constructor(props) {
@@ -34,6 +38,28 @@ export default class Settings extends Component {
     });
   }
 
+  handleFormSubmit = async (storage, { token, error }) => {
+    if (error) {
+      alert(error);
+      return;
+    }
+  
+    this.setState({ isLoading: true });
+  
+    try {
+      await this.billUser({
+        storage,
+        source: token.id
+      });
+  
+      alert("Your card has been charged successfully!");
+      this.props.history.push("/");
+    } catch (e) {
+      alert(e);
+      this.setState({ isLoading: false });
+    }
+  }
+
   render() {
     return (
       <div className="Settings">
@@ -54,6 +80,18 @@ export default class Settings extends Component {
             text="Change Password"
           />
         </LinkContainer>
+
+
+        <StripeProvider apiKey={config.STRIPE_KEY}>
+          <Elements>
+            <BillingForm
+              loading={this.state.isLoading}
+              onSubmit={this.handleFormSubmit}
+            />
+          </Elements>
+        </StripeProvider>
+
+
       </div>
     );
   }
