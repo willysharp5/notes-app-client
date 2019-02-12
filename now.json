@@ -1,7 +1,6 @@
 {
     "version": 2,
     "name": "note-app-serverless",
-    "alias": "note-app-serverless",
     "builds": [
       { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } }
     ],
